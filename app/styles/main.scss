@@ -1,3 +1,15 @@
+@mixin at-breakpoint($mark) {
+    @media (min-width: $mark) {
+        @content;
+    }
+}
+
+@mixin up-to-breakpoint($mark) {
+    @media (max-width: $mark) {
+        @content;
+    }
+}
+
 body {
     margin: 0;
 }
@@ -32,13 +44,16 @@ body,
 
 $lip: 64px;
 $duration: 0.3s;
+$break: 1024px;
 
 .pusher {
     transition: all $duration;
     perspective: 1200px;
 
-    &.is-pushed.fold-back {
-        transform: translateX(100%) translateX(-($lip));
+    @include up-to-breakpoint($break) {
+        &.is-pushed.fold-back {
+            transform: translateX(100%) translateX(-($lip));
+        }
     }
 }
 
@@ -52,42 +67,56 @@ $duration: 0.3s;
     left: 0;
     padding-right: $lip;
 
-    transform: translateX(-100%) translateX($lip);
-    transition: all $duration;
+    @include up-to-breakpoint($break) {
+        transform: translateX(-100%) translateX($lip);
+        transition: all $duration;
+    }
+
+    @include at-breakpoint($break) {
+        right: auto;
+        width: 300px;
+        padding-right: 0;
+    }
 
     .scroller {
         background: orange;
     }
 
-    .is-pushed.drop-back & {
-        transform: translateX(0);
-    }
+    @include up-to-breakpoint($break) {
+        .is-pushed.drop-back & {
+            transform: translateX(0);
+        }
 
-    &:after {
-        content: '';
+        &:after {
+            content: '';
 
-        position: absolute;
-        visibility: hidden;
-        z-index: -1;
-        top: 0;
-        right: -100%;
-        bottom: 0;
-        left: 0;
-        opacity: 0;
+            position: absolute;
+            visibility: hidden;
+            z-index: -1;
+            top: 0;
+            right: -100%;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
 
-        background: rgba(0, 0, 0, 0.5);
-
-        transition: opacity $duration,
-                    visibility 0 linear $duration;
-
-        .is-pushed & {
-            visibility: visible;
-            opacity: 1;
+            background: rgba(0, 0, 0, 0.5);
 
             transition: opacity $duration,
-                        visibility 0 linear;
+                        visibility 0 linear $duration;
 
+            .is-pushed & {
+                visibility: visible;
+                opacity: 1;
+
+                transition: opacity $duration,
+                            visibility 0 linear;
+
+            }
         }
+    }
+
+    @include at-breakpoint($break) {
+        transform: none;
     }
 }
 
@@ -96,11 +125,18 @@ $duration: 0.3s;
     transform-origin: top left;
     transition: all $duration;
 
-    .is-pushed.fold-back & {
-        transform: rotateY(45deg);
+    @include up-to-breakpoint($break) {
+        .is-pushed.fold-back & {
+            transform: rotateY(45deg);
+        }
+
+        .is-pushed.drop-back & {
+            transform: translateZ(-100px);
+        }
     }
 
-    .is-pushed.drop-back & {
-        transform: translateZ(-100px);
+    @include at-breakpoint($break) {
+        margin-left: 300px;
+        background: yellow;
     }
 }
