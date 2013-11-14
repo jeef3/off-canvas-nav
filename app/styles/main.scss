@@ -29,7 +29,7 @@ body,
     transform-style: preserve3d;
 }
 
-$lip: 128px;
+$lip: 64px;
 
 .pusher {
     transition: all 0.5s;
@@ -52,22 +52,41 @@ $lip: 128px;
     padding-right: $lip;
 
     transform: translateX(-100%) translateX($lip);
+    transition: all 0.5s;
 
     .scroller {
         background: orange;
+    }
+
+    .is-pushed & {
+        // transform: translateX(0);
     }
 
     &:after {
         content: '';
 
         position: absolute;
+        visibility: hidden;
         z-index: -1;
         top: 0;
-        right: 0;
+        right: -100%;
         bottom: 0;
         left: 0;
+        opacity: 0;
 
-        background: rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.5);
+
+        transition: opacity 0.5s,
+                    visibility 0 linear 0.5s;
+
+        .is-pushed & {
+            visibility: visible;
+            opacity: 1;
+
+            transition: opacity 0.5s,
+                        visibility 0 linear;
+
+        }
     }
 }
 
