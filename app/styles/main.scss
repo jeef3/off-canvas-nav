@@ -37,8 +37,8 @@ $duration: 0.3s;
     transition: all $duration;
     perspective: 1200px;
 
-    &.is-pushed {
-        // transform: translateX(100%) translateX(-($lip));
+    &.is-pushed.fold-back {
+        transform: translateX(100%) translateX(-($lip));
     }
 }
 
@@ -46,7 +46,6 @@ $duration: 0.3s;
     box-sizing: border-box;
     z-index: 1;
     position: absolute;
-    // z-index: 1;
     top: 0;
     right: 0;
     bottom: 0;
@@ -60,7 +59,7 @@ $duration: 0.3s;
         background: orange;
     }
 
-    .is-pushed & {
+    .is-pushed.drop-back & {
         transform: translateX(0);
     }
 
@@ -97,9 +96,11 @@ $duration: 0.3s;
     transform-origin: top left;
     transition: all $duration;
 
-    .is-pushed & {
-        // transform: rotateY(45deg);
-        transform: translateZ(-100px);
+    .is-pushed.fold-back & {
+        transform: rotateY(45deg);
+    }
 
+    .is-pushed.drop-back & {
+        transform: translateZ(-100px);
     }
 }

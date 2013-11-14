@@ -23,7 +23,7 @@
         <![endif]-->
 
         <div class="container"> <!-- ng-app -->
-            <div class="pusher is-pushed">
+            <div class="pusher fold-back is-pushed">
 
                 <div class="filter-panel">
                     <div class="scroller">
@@ -90,7 +90,7 @@
         <!-- endbuild -->
 
         <script>
-        $('.filter-panel, .main').on('touchend', function () {
+        $('.filter-panel, .main').on('click', function () {
             $('.pusher').toggleClass('is-pushed');
         })
         </script>
