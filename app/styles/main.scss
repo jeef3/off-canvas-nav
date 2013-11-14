@@ -12,6 +12,7 @@ body,
 
 .scroller {
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 .scroller,
@@ -36,7 +37,7 @@ $lip: 64px;
     perspective: 1200px;
 
     &.is-pushed {
-        transform: translateX(100%) translateX(-($lip));
+        // transform: translateX(100%) translateX(-($lip));
     }
 }
 
@@ -59,7 +60,7 @@ $lip: 64px;
     }
 
     .is-pushed & {
-        // transform: translateX(0);
+        transform: translateX(0);
     }
 
     &:after {
@@ -96,7 +97,8 @@ $lip: 64px;
     transition: all 0.5s;
 
     .is-pushed & {
-        transform: rotateY(45deg);
+        // transform: rotateY(45deg);
+        transform: translateZ(-100px);
 
     }
 }
