@@ -76,6 +76,7 @@ $break: 1024px;
         right: auto;
         width: 300px;
         padding-right: 0;
+        padding-top: 32px;
     }
 
     .scroller {
@@ -116,7 +117,7 @@ $break: 1024px;
     }
 
     @include at-breakpoint($break) {
-        transform: none;
+        // transform: none;
     }
 }
 
@@ -124,6 +125,10 @@ $break: 1024px;
     background: green;
     transform-origin: top left;
     transition: all $duration;
+
+    .scroller-content {
+        padding-top: 32px;
+    }
 
     @include up-to-breakpoint($break) {
         .is-pushed.fold-back & {
@@ -139,4 +144,17 @@ $break: 1024px;
         margin-left: 300px;
         background: yellow;
     }
+}
+
+.fixed {
+    position: absolute;
+    z-index: 1;
+    height: 32px;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    line-height: 32px;
+
+    background: darkgray;
 }
