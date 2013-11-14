@@ -12,6 +12,7 @@ body,
 
 .scroller {
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 .scroller,
@@ -30,12 +31,13 @@ body,
 }
 
 $lip: 64px;
+$duration: 0.3s;
 
 .pusher {
-    transition: all 0.5s;
+    transition: all $duration;
     perspective: 1200px;
 
-    &.is-pushed {
+    &.is-pushed.fold-back {
         transform: translateX(100%) translateX(-($lip));
     }
 }
@@ -44,7 +46,6 @@ $lip: 64px;
     box-sizing: border-box;
     z-index: 1;
     position: absolute;
-    // z-index: 1;
     top: 0;
     right: 0;
     bottom: 0;
@@ -52,14 +53,14 @@ $lip: 64px;
     padding-right: $lip;
 
     transform: translateX(-100%) translateX($lip);
-    transition: all 0.5s;
+    transition: all $duration;
 
     .scroller {
         background: orange;
     }
 
-    .is-pushed & {
-        // transform: translateX(0);
+    .is-pushed.drop-back & {
+        transform: translateX(0);
     }
 
     &:after {
@@ -76,14 +77,14 @@ $lip: 64px;
 
         background: rgba(0, 0, 0, 0.5);
 
-        transition: opacity 0.5s,
-                    visibility 0 linear 0.5s;
+        transition: opacity $duration,
+                    visibility 0 linear $duration;
 
         .is-pushed & {
             visibility: visible;
             opacity: 1;
 
-            transition: opacity 0.5s,
+            transition: opacity $duration,
                         visibility 0 linear;
 
         }
@@ -93,10 +94,13 @@ $lip: 64px;
 .main {
     background: green;
     transform-origin: top left;
-    transition: all 0.5s;
+    transition: all $duration;
 
-    .is-pushed & {
+    .is-pushed.fold-back & {
         transform: rotateY(45deg);
+    }
 
+    .is-pushed.drop-back & {
+        transform: translateZ(-100px);
     }
 }
