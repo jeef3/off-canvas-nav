@@ -28,7 +28,7 @@ body,
 }
 
 .scroller,
-.scroller-inner {
+.scroller-content {
     position: relative;
 }
 
@@ -115,10 +115,6 @@ $break: 1024px;
             }
         }
     }
-
-    @include at-breakpoint($break) {
-        // transform: none;
-    }
 }
 
 .main {
@@ -147,7 +143,9 @@ $break: 1024px;
 }
 
 .fixed {
-    position: absolute;
+    position: fixed;
+    // position: -webkit-sticky;
+
     z-index: 1;
     height: 32px;
     top: 0;
