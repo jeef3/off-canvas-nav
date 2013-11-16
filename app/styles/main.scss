@@ -131,14 +131,33 @@ $break: 1024px;
             transform: rotateY(45deg);
         }
 
+        .drop-back & {
+            transform-origin: top right;
+            animation-fill-mode: both;
+        }
+
         .is-pushed.drop-back & {
-            transform: translateZ(-100px);
+            animation: drop-back ($duration * 3) / 2;
         }
     }
 
     @include at-breakpoint($break) {
         margin-left: 300px;
         background: yellow;
+    }
+}
+
+@keyframes drop-back {
+    0% {
+        transform: translateZ(0) rotateY(0);
+    }
+
+    50% {
+        transform: translateZ(0) rotateY(-10deg);
+    }
+
+    100% {
+        transform: translateZ(-100px) rotateY(0deg);;
     }
 }
 
