@@ -133,11 +133,12 @@ $break: 1024px;
 
         .drop-back & {
             transform-origin: top right;
-            animation-fill-mode: both;
+            animation-fill-mode: forwards;
         }
 
         .is-pushed.drop-back & {
-            animation: drop-back ($duration * 3) / 2;
+            // animation: drop-back ($duration * 3) / 2;
+            transform: translateZ(-100px);
         }
     }
 
