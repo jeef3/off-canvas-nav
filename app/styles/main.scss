@@ -1,10 +1,14 @@
-@mixin at-breakpoint($mark) {
+$lip: 64px;
+$duration: 0.3s;
+$break: 1024px;
+
+@mixin from-breakpoint($mark: $break) {
     @media (min-width: $mark) {
         @content;
     }
 }
 
-@mixin up-to-breakpoint($mark) {
+@mixin up-to-breakpoint($mark: $break) {
     @media (max-width: $mark) {
         @content;
     }
@@ -42,10 +46,6 @@ body,
     transform-style: preserve3d;
 }
 
-$lip: 64px;
-$duration: 0.3s;
-$break: 1024px;
-
 .pusher {
     transition: all $duration;
     perspective: 1200px;
@@ -72,7 +72,7 @@ $break: 1024px;
         transition: all $duration;
     }
 
-    @include at-breakpoint($break) {
+    @include from-breakpoint($break) {
         right: auto;
         width: 300px;
         padding-right: 0;
@@ -142,7 +142,7 @@ $break: 1024px;
         }
     }
 
-    @include at-breakpoint($break) {
+    @include from-breakpoint($break) {
         margin-left: 300px;
         background: yellow;
     }
