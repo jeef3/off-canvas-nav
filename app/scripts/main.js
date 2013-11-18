@@ -19,5 +19,5 @@
         })
         .on('click', function (e) {
             $pusher.toggleClass('is-pushed');
-        })
+        });
 })();
