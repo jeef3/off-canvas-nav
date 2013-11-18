@@ -15,6 +15,7 @@ $break: 1024px;
 }
 
 body {
+  font-family: 'Lato', sans-serif;
   margin: 0;
 }
 
@@ -28,6 +29,8 @@ body,
 
 .inner {
   position: relative;
+
+  padding: 1em;
 }
 
 .canvas {
@@ -66,17 +69,17 @@ body,
 
   line-height: 32px;
 
-  background: darkgray;
+  background: #fd6a62;
 }
 
 .main {
   position: relative;
 
-  background: green;
-
   @include up-to-breakpoint($break) {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+
+    background: #7bb7fa;
 
     .is-pushed.fold-back & {
       transform: rotateY(45deg);
@@ -96,7 +99,7 @@ body,
 
   @include from-breakpoint($break) {
     margin-left: 300px;
-    background: yellow;
+    background: #60d7a9;
   }
 }
 
@@ -110,7 +113,7 @@ body,
   left: 0;
   padding-right: $lip;
 
-  background: orange;
+  background: #fdc162;
 
   @include up-to-breakpoint($break) {
     overflow-y: scroll;
