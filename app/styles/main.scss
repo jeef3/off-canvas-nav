@@ -25,9 +25,7 @@ body {
 }
 
 html,
-body,
-.canvas,
-.pusher {
+body {
   height: 100%;
 }
 
@@ -38,15 +36,18 @@ body,
 
   @include up-to-breakpoint {
     overflow: hidden;
+    height: 100%;
   }
 }
 
 .pusher {
-  transition: all $duration;
-  perspective: 1200px;
-  transform-style: preserve3d;
-
   @include up-to-breakpoint {
+    height: 100%;
+
+    transition: all $duration;
+    perspective: 1200px;
+    transform-style: preserve3d;
+
     &.is-pushed.fold-back {
       transform: translateX(100%) translateX(-($lip));
     }
@@ -127,14 +128,14 @@ body,
 .aside {
   box-sizing: border-box;
   position: absolute;
-  top: 0;
-  left: 0;
 
   background: #fdc162;
 
   @include up-to-breakpoint {
     height: 100%;
     width: 100%;
+    top: 0;
+    left: 0;
 
     transform: translateX(-100%);
     transition: all $duration;
@@ -172,13 +173,17 @@ body,
   }
 
   @include from-breakpoint {
+    position: fixed;
+    overflow-y: scroll;
     width: 300px;
-    padding-top: $navbar-height;
+    top: $navbar-height;
+    left: 0;
+    bottom: 0;
   }
 }
 
 .some-other-content-container {
-  padding: 0 1em;
+  padding: 0 1em 1em;
 }
 
 @keyframes drop-back {
