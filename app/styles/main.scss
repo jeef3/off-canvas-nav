@@ -30,12 +30,7 @@ body,
 
 .inner {
   position: relative;
-
-  padding: 1em;
-
-  @include from-breakpoint {
-    padding-top: $navbar-height;
-  }
+  padding: 0 1em;
 }
 
 .canvas {
@@ -81,11 +76,14 @@ body,
 }
 
 .main {
+  box-sizing: border-box;
   position: relative;
+  padding-top: $navbar-height;
 
   @include up-to-breakpoint {
     overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+    // -webkit-overflow-scrolling: touch;
+    height: 100%;
 
     background: #7bb7fa;
 
@@ -159,8 +157,8 @@ body,
   }
 
   @include from-breakpoint {
-    right: auto;
     width: 300px;
+    padding-top: $navbar-height;
   }
 }
 
