@@ -7,6 +7,10 @@ $navbar-height: 48px;
   @media (min-width: $mark) {
     @content;
   }
+
+  .no-mediaqueries & {
+    @content;
+  }
 }
 
 @mixin up-to-breakpoint($mark: $break) {
@@ -25,11 +29,6 @@ body,
 .canvas,
 .pusher {
   height: 100%;
-}
-
-.inner {
-  position: relative;
-  padding: 0 1em;
 }
 
 .canvas {
@@ -54,15 +53,23 @@ body,
   }
 }
 
-.navbar {
-  position: fixed;
-  // position: -webkit-sticky;
+.scroller {
+  @include up-to-breakpoint {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+    top: 48px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+.scroller-inner {
 
-  z-index: 1;
+}
+
+.navbar {
   height: $navbar-height;
-  top: 0;
-  left: 0;
-  width: 100%;
 
   line-height: $navbar-height;
   text-align: center;
@@ -70,16 +77,26 @@ body,
   color: #933e39;
 
   background: #fd6a62;
+
+  @include up-to-breakpoint {
+
+  }
+
+  @include from-breakpoint {
+    position: fixed;
+    z-index: 1;
+
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
 }
 
 .main {
-  box-sizing: border-box;
   position: relative;
-  padding-top: $navbar-height;
 
   @include up-to-breakpoint {
-    overflow-y: scroll;
-    // -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
     height: 100%;
 
     background: #7bb7fa;
@@ -101,6 +118,7 @@ body,
   }
 
   @include from-breakpoint {
+    padding-top: $navbar-height;
     margin-left: 300px;
     background: #60d7a9;
   }
@@ -115,8 +133,6 @@ body,
   background: #fdc162;
 
   @include up-to-breakpoint {
-    overflow-y: scroll;
-    // -webkit-overflow-scrolling: touch;
     height: 100%;
 
     transform: translateX(-100%);
@@ -158,6 +174,10 @@ body,
     width: 300px;
     padding-top: $navbar-height;
   }
+}
+
+.some-other-content-container {
+  padding: 0 1em;
 }
 
 @keyframes drop-back {
