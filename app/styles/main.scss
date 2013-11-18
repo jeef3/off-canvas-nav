@@ -1,6 +1,7 @@
 $lip: 64px;
 $duration: 0.3s;
 $break: 1024px;
+$navbar-height: 48px;
 
 @mixin from-breakpoint($mark: $break) {
   @media (min-width: $mark) {
@@ -31,6 +32,10 @@ body,
   position: relative;
 
   padding: 1em;
+
+  @include from-breakpoint {
+    padding-top: $navbar-height;
+  }
 }
 
 .canvas {
@@ -50,7 +55,7 @@ body,
   transition: all $duration;
   perspective: 1200px;
 
-  @include up-to-breakpoint($break) {
+  @include up-to-breakpoint {
     &.is-pushed.fold-back {
       transform: translateX(100%) translateX(-($lip));
     }
@@ -62,12 +67,15 @@ body,
   // position: -webkit-sticky;
 
   z-index: 1;
-  height: 32px;
+  height: $navbar-height;
   top: 0;
   left: 0;
   width: 100%;
 
-  line-height: 32px;
+  line-height: $navbar-height;
+  text-align: center;
+  font-weight: 700;
+  color: #933e39;
 
   background: #fd6a62;
 }
@@ -75,7 +83,7 @@ body,
 .main {
   position: relative;
 
-  @include up-to-breakpoint($break) {
+  @include up-to-breakpoint {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 
@@ -97,7 +105,7 @@ body,
     }
   }
 
-  @include from-breakpoint($break) {
+  @include from-breakpoint {
     margin-left: 300px;
     background: #60d7a9;
   }
@@ -105,32 +113,19 @@ body,
 
 .aside {
   box-sizing: border-box;
-  z-index: 1;
   position: absolute;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
-  padding-right: $lip;
 
   background: #fdc162;
 
-  @include up-to-breakpoint($break) {
+  @include up-to-breakpoint {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 
-    transform: translateX(-100%) translateX($lip);
+    transform: translateX(-100%);
     transition: all $duration;
-  }
 
-  @include from-breakpoint($break) {
-    right: auto;
-    width: 300px;
-    padding-right: 0;
-    padding-top: 32px;
-  }
-
-  @include up-to-breakpoint($break) {
     .is-pushed.drop-back & {
       transform: translateX(0);
     }
@@ -161,6 +156,11 @@ body,
 
       }
     }
+  }
+
+  @include from-breakpoint {
+    right: auto;
+    width: 300px;
   }
 }
 
