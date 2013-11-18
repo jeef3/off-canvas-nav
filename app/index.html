@@ -20,12 +20,14 @@
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
         <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
         <script src="bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
     </head>
     <body>
         <div class="canvas"> <!-- ng-app -->
-            <div class="pusher drop-back">
+            <!-- TODO: Do I need .pusher? -->
+            <div class="pusher is-pushed drop-back">
                 <main class="main" role="main"> <!-- ng-view -->
                     <header class="navbar">Page fixed header with logo and main nav</header>
 
