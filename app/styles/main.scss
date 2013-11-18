@@ -58,10 +58,21 @@ body {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     position: absolute;
-    top: 48px;
+    top: $navbar-height;
     right: 0;
     bottom: 0;
     left: 0;
+  }
+
+  @include from-breakpoint {
+    .aside & {
+      overflow-y: scroll;
+      position: absolute;
+      top: $navbar-height;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
   }
 }
 .scroller-inner {
@@ -184,12 +195,20 @@ body {
 
   @include from-breakpoint {
     position: fixed;
-    overflow-y: scroll;
     width: 300px;
     top: $navbar-height;
     left: 0;
     bottom: 0;
   }
+}
+
+.aside-header {
+  margin: 0;
+
+  line-height: $navbar-height;
+  text-align: center;
+  color: #8c6a36;
+  font-weight: 700;
 }
 
 .some-other-content-container {
