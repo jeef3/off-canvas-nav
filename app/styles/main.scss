@@ -1,7 +1,7 @@
-$lip: 64px;
+$lip: 48px;
 $duration: 0.3s;
 $break: 1024px;
-$navbar-height: 48px;
+$navbar-height: $lip;
 
 @mixin from-breakpoint($mark: $break) {
   @media (min-width: $mark) {
@@ -30,8 +30,6 @@ body {
 }
 
 .canvas {
-  position: relative;
-
   background: #34495e;
 
   @include up-to-breakpoint {
@@ -48,7 +46,8 @@ body {
     perspective: 1200px;
     transform-style: preserve3d;
 
-    &.is-pushed.fold-back {
+    &.is-pushed.fold-back,
+    &.is-pushed.push-over {
       transform: translateX(100%) translateX(-($lip));
     }
   }
@@ -66,7 +65,11 @@ body {
   }
 }
 .scroller-inner {
-
+  &:after {
+    content: '';
+    display: table;
+    clear:both;
+  }
 }
 
 .navbar {
@@ -78,10 +81,6 @@ body {
   color: #933e39;
 
   background: #fd6a62;
-
-  @include up-to-breakpoint {
-
-  }
 
   @include from-breakpoint {
     position: fixed;
@@ -102,18 +101,22 @@ body {
 
     background: #7bb7fa;
 
+    transition: all $duration;
+
+    .fold-back & {
+      transform-origin: top left;
+    }
+
     .is-pushed.fold-back & {
       transform: rotateY(45deg);
     }
 
     .drop-back & {
-      transition: all $duration;
       transform-origin: top right;
       animation-fill-mode: forwards;
     }
 
     .is-pushed.drop-back & {
-      // animation: drop-back ($duration * 3) / 2;
       transform: translateZ(-100px);
     }
   }
@@ -126,19 +129,26 @@ body {
 }
 
 .aside {
-  box-sizing: border-box;
   position: absolute;
 
   background: #fdc162;
 
   @include up-to-breakpoint {
     height: 100%;
-    width: 100%;
     top: 0;
     left: 0;
 
     transform: translateX(-100%);
     transition: all $duration;
+
+    .drop-back & {
+      width: 100%;
+    }
+
+    .fold-back &,
+    .push-over & {
+      right: $lip;
+    }
 
     .is-pushed.drop-back & {
       transform: translateX(0);
@@ -184,18 +194,4 @@ body {
 
 .some-other-content-container {
   padding: 0 1em 1em;
-}
-
-@keyframes drop-back {
-  0% {
-    transform: translateZ(0) rotateY(0);
-  }
-
-  50% {
-    transform: translateZ(0) rotateY(-10deg);
-  }
-
-  100% {
-    transform: translateZ(-100px) rotateY(0deg);;
-  }
 }
